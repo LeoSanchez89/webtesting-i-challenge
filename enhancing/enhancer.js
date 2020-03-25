@@ -5,17 +5,6 @@ module.exports = {
   get,
 };
 
-let sword = {
-  name: "Magic Sword",
-  durability: 80,
-  enhancement: 15
-}
-
-const club = {
-  name: "Big Billy",
-  durability: 50,
-  enhancement: 20
-}
 
 function succeed(item) {
   if (item.enhancement === 20) {
@@ -27,7 +16,13 @@ function succeed(item) {
 }
 
 function fail(item) {
-
+  if (item.enhancement < 15) {
+    item.durability -= 5;
+  } if (item.enhancement >= 15) {
+    item.durability -= 10;
+  } if (item.enhancement > 16) {
+    item.enhancement -= 1;
+  }
   return { ...item };
 }
 
@@ -37,6 +32,11 @@ function repair(item) {
 }
 
 function get(item) {
+  if (item.enhancement > 0) {
+    item.name = `[+${item.enhancement}] ${item.name}`;
+  } else {
+    return item;
+  }
   return { ...item };
 }
 
